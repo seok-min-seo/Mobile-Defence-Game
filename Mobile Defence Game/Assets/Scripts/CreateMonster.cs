@@ -6,10 +6,7 @@ public class CreateMonster : MonoBehaviour
 {
     private GameManager gameManager;
 
-    public GameObject respawnSpot1;
-    public GameObject respawnSpot2;
-    public GameObject respawnSpot3;
-    public GameObject respawnSpot4;
+    public List<GameObject> respawnSpotList;
 
     public GameObject monster1Prefab;
    
@@ -40,24 +37,8 @@ public class CreateMonster : MonoBehaviour
             {
                 //몬스터 생성 함수 시작
                 lastSpawnTime = Time.time;  //우선 마지막으로 만든 시간에 현재시간을 박음     
-                int respawnSpotNumber = Random.Range(1, 5); //랜덤하게 1~4까지의 숫자를 박음
-                GameObject respawnSpot = null;      //리스폰 스팟에는 기본적으로 널값을 박아주고
-                if(respawnSpotNumber == 1)              //순차적으로 몇인지 확인해서 
-                {
-                    respawnSpot = respawnSpot1;         //아무것도없는 널값에 싱싱한 스팟장소를 박아줌
-                }
-                if (respawnSpotNumber == 2)
-                {
-                    respawnSpot = respawnSpot2;
-                }
-                if (respawnSpotNumber == 3)
-                {
-                    respawnSpot = respawnSpot3;
-                }
-                if (respawnSpotNumber == 4)
-                {
-                    respawnSpot = respawnSpot4;
-                }
+                int index = Random.Range(0, 4); //랜덤하게 1~4까지의 숫자를 박음
+                GameObject respawnSpot = respawnSpotList[index];
                 Instantiate(monsterPrefab, respawnSpot.transform.position, Quaternion.identity); //프리팹으로 몬스터를 박아주고
                 spawnCount += 1;                    // 스폰숫자를 올려준다
             }
