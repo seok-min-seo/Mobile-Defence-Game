@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class CharacterBehavior : MonoBehaviour
 {
     private CharacterStat characterStat;
-    private GameManager gameManager;
 
     public GameObject bullet;
     private Animator animator;
@@ -16,7 +15,6 @@ public class CharacterBehavior : MonoBehaviour
     void Start()
     {
         characterStat = gameObject.GetComponent<CharacterStat>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         animator = gameObject.GetComponent<Animator>();
         audioSource = gameObject.GetComponent<AudioSource>();
 
@@ -44,11 +42,11 @@ public class CharacterBehavior : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject(0) == true) return;
 
         //위의 소스코드는 만약 UI가 존재한다면 마우스 감지를 하지말아라 라는 소스코드
-        if (characterStat.canlevelUP(gameManager.seed))
+        if (characterStat.canlevelUP(GameManager.instance.seed))
         {
             characterStat.increaseLevel();
-            gameManager.seed -= characterStat.upgradeCost;
-            gameManager.updateText();
+            GameManager.instance.seed -= characterStat.upgradeCost;
+            GameManager.instance.updateText();
         }
     }
 }

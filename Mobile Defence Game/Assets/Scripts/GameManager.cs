@@ -5,6 +5,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { get; set;}
+
+    private void Awake() //start나 update보다 먼저 수행
+    {
+      if(instance == null)
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     public Text seedText;
     public Text roundText;

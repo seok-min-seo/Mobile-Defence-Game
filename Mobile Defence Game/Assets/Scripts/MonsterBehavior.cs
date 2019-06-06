@@ -7,7 +7,6 @@ public class MonsterBehavior : MonoBehaviour
     
     private MonsterStats monsterStat;
     private Animator animator;
-    private GameManager gameManager;
     private bool attacking = false;
 
     private float lastAttackTime;
@@ -17,7 +16,6 @@ public class MonsterBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>(); 
         //겜매니저는 GameObject.FInd문으로 찾고 겟오브젝트를 써야한다
         AudioSource audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.PlayOneShot(audioSource.clip);
@@ -52,7 +50,7 @@ public class MonsterBehavior : MonoBehaviour
         {
             Destroy(gameObject);
             
-            gameManager.decreaseLife();
+            GameManager.instance.decreaseLife();
         }
         else if(other.gameObject.tag == "Character")
         {

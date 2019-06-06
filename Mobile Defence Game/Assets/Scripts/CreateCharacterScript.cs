@@ -11,7 +11,6 @@ public class CreateCharacterScript : MonoBehaviour
     private GameObject CharacterPrefab;
     private GameObject character;
     private AudioSource audioSource;
-    private GameManager gameManager;
 
     private CharacterStat characterStat;
 
@@ -19,7 +18,6 @@ public class CreateCharacterScript : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -35,7 +33,7 @@ public class CreateCharacterScript : MonoBehaviour
 
         //위의 소스코드는 만약 UI가 존재한다면 마우스 감지를 하지말아라 라는 소스코드
 
-        if (gameManager.nowSelect == 1)
+        if (GameManager.instance.nowSelect == 1)
         {
             CharacterPrefab = characterPrefab1;
             characterStat = characterPrefab1.GetComponent<CharacterStat>();
@@ -49,13 +47,13 @@ public class CreateCharacterScript : MonoBehaviour
         if (character == null)
         {
             CharacterStat characterStat = CharacterPrefab.GetComponent<CharacterStat>();
-            if (characterStat.canCreate(gameManager.seed))
+            if (characterStat.canCreate(GameManager.instance.seed))
 
             {
                 character = (GameObject)Instantiate(CharacterPrefab, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioSource.clip);
-                gameManager.seed -= character.GetComponent<CharacterStat>().cost;
-                gameManager.updateText();
+                GameManager.instance.seed -= character.GetComponent<CharacterStat>().cost;
+                GameManager.instance.updateText();
             }
         }
     }
