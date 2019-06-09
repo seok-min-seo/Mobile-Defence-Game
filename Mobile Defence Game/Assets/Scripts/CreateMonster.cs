@@ -39,6 +39,7 @@ public class CreateMonster : MonoBehaviour
                 int index = Random.Range(0, 4); //랜덤하게 1~4까지의 숫자를 박음
                 GameObject respawnSpot = respawnSpotList[index];
                 Instantiate(monsterPrefab, respawnSpot.transform.position, Quaternion.identity); //프리팹으로 몬스터를 박아주고
+                GameManager.instance.monsterAddCount++;
                 spawnCount += 1;                    // 스폰숫자를 올려준다
             }
             if (spawnCount == GameManager.instance.spawnNumber &&                //스폰숫자가 스폰넘버랑 같거나
