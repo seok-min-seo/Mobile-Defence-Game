@@ -8,7 +8,7 @@ public class MenuManager : MonoBehaviour
     bool pause = false;
 
 
-    public GameObject menuCanvas;
+    public GameObject menuCanvas; // 메뉴 캔버스
 
     
 
@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
 
     public void GameReset()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameScene"); //게임신으로이동
         Time.timeScale = 1;
     }
 
