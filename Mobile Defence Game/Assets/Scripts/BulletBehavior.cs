@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    public GameObject character;
+    
     public BulletStat bulletStat { get; set; }
 
     public float activeTime = 3.0f;
-    public float spawnTime;
+    
 
     public BulletBehavior()
     {
         bulletStat = new BulletStat(0, 0);
     }
 
+    public GameObject character;
+
     public void Spawn()
     {
         gameObject.SetActive(true);
-        spawnTime = Time.time;
+        
     }
-    
+
+    private void OnEnable() //특정한 오브젝트가 활성화 처리 되었을때 자동으로 불러와지는 유니티의 함수
+    {
+        StartCoroutine(BulletInactive(activeTime));
+    }
+
+    IEnumerator BulletInactive(float activeTime)
+    {
+        yield return new WaitForSeconds(activeTime);
+        gameObject.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,14 +43,9 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - spawnTime >= activeTime)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            transform.Translate(Vector2.right * bulletStat.speed * Time.deltaTime);
-        }
+       
+        transform.Translate(Vector2.right * bulletStat.speed * Time.deltaTime);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
