@@ -41,22 +41,33 @@ public class CreateMonster : MonoBehaviour
     {
         while(true)
         {
-            if (GameManager.instance.round > GameManager.instance.totalRound) StopCoroutine(coroutine);
-            if(spawnCount < GameManager.instance.spawnNumber)
+
+            if (GameManager.instance.round > GameManager.instance.totalRound)
+            {
+                StopCoroutine(coroutine);
+                
+            }
+            if (spawnCount < GameManager.instance.spawnNumber)
             {
                 Create();
 
             }
+            Debug.Log(GameManager.instance.spawnNumber);
+            Debug.Log(spawnCount);
             if(spawnCount == GameManager.instance.spawnNumber &&
-                GameObject.FindGameObjectsWithTag("Monster") == null)
+                GameObject.FindGameObjectWithTag("Monster") == null)
+                
             {
-                if(GameManager.instance.totalRound == GameManager.instance.round)
+                
+                if (GameManager.instance.totalRound == GameManager.instance.round)
                 {
+                    
                     GameManager.instance.gameClear();
                     GameManager.instance.round += 1;
                 }
                 else
                 {
+                    
                     GameManager.instance.clearRound();                           //겜매니저에서 만든 클리어라운드를 실행
                     spawnCount = 0;
                   if (GameManager.instance.round == 4)

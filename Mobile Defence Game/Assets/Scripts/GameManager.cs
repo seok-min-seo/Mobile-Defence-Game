@@ -92,7 +92,8 @@ public class GameManager : MonoBehaviour
 
     public void clearRound()
     {
-        if(round < totalRound)
+        
+        if (round < totalRound)
         {
             nextRound();        //넥스트라운드 실행
             seed += reward;     // seed 보상 주고
